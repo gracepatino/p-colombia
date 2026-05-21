@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puntos Colombia | Mercado Oficial</title>
+  <style>
+    :root {
+      --paper: #f2e7d2;
+      --paper-2: #fff5df;
+      --ink: #24112f;
+      --ink-soft: rgba(36, 17, 47, .14);
+      --line: 3px solid var(--ink);
+      --thin: 2px solid var(--ink);
+      --shadow: 7px 7px 0 var(--ink);
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, var(--ink-soft), transparent 24%),
+        radial-gradient(circle at 82% 8%, rgba(36, 17, 47, .09), transparent 26%),
+        linear-gradient(180deg, #f6ead2, #e8d4b6 58%, #f3e5cc);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .28;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(36,17,47,.06) 0 1px, transparent 1px 4px),
+        repeating-linear-gradient(90deg, rgba(36,17,47,.045) 0 1px, transparent 1px 5px);
+      mix-blend-mode: multiply;
+      z-index: 99;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .ink-block {
+      background: var(--ink);
+      color: var(--paper-2);
+      border: var(--line);
+    }
+
+    .outline-block {
+      border: var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outline-block::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(36,17,47,.35);
+      pointer-events: none;
+    }
+
+    h1, h2, h3, .big-type {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+      line-height: .92;
+      margin: 0;
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .seal {
+      width: 74px;
+      height: 74px;
+      border: var(--thin);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      background: var(--paper-2);
+      box-shadow: 4px 4px 0 var(--ink);
+      transform: rotate(-4deg);
+    }
+
+    .brand h1 {
+      font-size: clamp(2.3rem, 6vw, 5rem);
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .chip, .btn {
+      border: var(--thin);
+      background: var(--paper-2);
+      color: var(--ink);
+      text-decoration: none;
+      padding: 9px 11px;
+      text-transform: uppercase;
+      font-weight: 900;
+      box-shadow: 4px 4px 0 var(--ink);
+      display: inline-block;
+    }
+
+    .chip.dark, .btn.dark {
+      background: var(--ink);
+      color: var(--paper-2);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .poster {
+      padding: 18px;
+      background:
+        repeating-linear-gradient(135deg, rgba(36,17,47,.055) 0 10px, transparent 10px 20px),
+        var(--paper);
+      text-align: center;
+    }
+
+    .poster h2 {
+      font-size: clamp(4.2rem, 11vw, 10.2rem);
+      text-shadow: 3px 3px 0 var(--paper-2);
+    }
+
+    .poster .subline {
+      border: var(--thin);
+      background: var(--paper-2);
+      display: inline-block;
+      padding: 9px 12px;
+      margin-top: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: clamp(.9rem, 2vw, 1.15rem);
+    }
+
+    .instructions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .instruction-card {
+      padding: 14px;
+    }
+
+    .instruction-card h3 {
+      font-size: clamp(1.8rem, 3.4vw, 3.3rem);
+      margin-bottom: 8px;
+    }
+
+    .instruction-card p,
+    .instruction-card li {
+      font-weight: 900;
+      line-height: 1.35;
+      font-size: 1rem;
+    }
+
+    .warning-title {
+      text-align: center;
+      padding: 12px 14px;
+      margin: 24px 0 12px;
+      box-shadow: var(--shadow);
+      font-size: clamp(2rem, 5vw, 4.6rem);
+    }
+
+    .section-title {
+      border: var(--line);
+      background: var(--ink);
+      color: var(--paper-2);
+      padding: 10px 14px;
+      margin: 26px 0 12px;
+      box-shadow: var(--shadow);
+      font-size: clamp(2.3rem, 5vw, 5rem);
+      text-align: center;
+    }
+
+    .filter-bar {
+      border: var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .filter-bar input {
+      border: var(--thin);
+      background: var(--paper-2);
+      font-size: 1rem;
+      padding: 12px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .filter-bar button {
+      border: var(--thin);
+      background: var(--ink);
+      color: var(--paper-2);
+      padding: 12px 14px;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: 900;
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .product {
+      border: var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto 220px 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px dashed rgba(36,17,47,.35);
+      pointer-events: none;
+    }
+
+    .ribbon {
+      background: var(--ink);
+      color: var(--paper-2);
+      border-bottom: var(--thin);
+      padding: 7px 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .visual {
+      border-bottom: var(--thin);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 220px;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,.35), transparent 45%),
+        repeating-linear-gradient(135deg, rgba(36,17,47,.05) 0 9px, transparent 9px 18px),
+        var(--paper-2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .digital-visual {
+      width: calc(100% - 24px);
+      height: calc(100% - 24px);
+      border: var(--thin);
+      background:
+        repeating-linear-gradient(0deg, rgba(36,17,47,.06) 0 1px, transparent 1px 4px),
+        var(--paper-2);
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      text-align: center;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      text-transform: uppercase;
+      font-size: 1.55rem;
+      line-height: .95;
+    }
+
+    .product-body {
+      padding: 12px;
+      display: grid;
+      gap: 9px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .product h3 {
+      font-size: 1.45rem;
+    }
+
+    .product p {
+      margin: 0;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .price {
+      border: var(--thin);
+      background: var(--paper-2);
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-top: auto;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .price strong {
+      font-size: 1.8rem;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .collections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .collection {
+      padding: 14px;
+    }
+
+    .collection h3 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .collection p,
+    .collection li {
+      font-weight: 800;
+      line-height: 1.42;
+    }
+
+    .footer {
+      margin: 24px 0 10px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 1040px) {
+      .instructions,
+      .collections { grid-template-columns: 1fr; }
+      .catalog { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .nav,
+      .brand,
+      .filter-bar { grid-template-columns: 1fr; }
+      .nav-links { justify-content: flex-start; }
+      .catalog { grid-template-columns: 1fr; }
+      .outline-block,
+      .section-title,
+      .warning-title,
+      .product,
+      .filter-bar,
+      .footer { box-shadow: 5px 5px 0 var(--ink); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav outline-block">
+      <div class="brand">
+        <div class="seal">🕊️</div>
+        <div>
+          <h1>Puntos Colombia</h1>
+          <p>Mercado oficial de artículos curiosos, inesperados y probablemente poco necesarios</p>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a class="chip dark" href="#mercado">Mercado</a>
+        <a class="chip" href="#colecciones">Colecciones</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <article class="poster outline-block">
+        <h2>El Espíritu Santo Audita</h2>
+        <div class="subline">Compre con fe, puntos y responsabilidad administrativa</div>
+      </article>
+    </section>
+
+    <section class="instructions">
+      <article class="instruction-card outline-block">
+        <h3>¿Cómo se compra?</h3>
+        <ol>
+          <li>Le escribes por privado a Grace.</li>
+          <li>Dices cuál artículo te interesa.</li>
+          <li>Grace consulta el oráculo logístico.</li>
+          <li>Se te confirma si está disponible o si ya fue arrebatado por otro creyente del mercado.</li>
+        </ol>
+      </article>
+
+      <article class="instruction-card outline-block">
+        <h3>Advertencia oficial</h3>
+        <p>Las cantidades son sospechosamente bajas. Algunas unidades existen en número tan pequeño que parecen haber sido compradas con bajo presupuesto.</p>
+        <p>Los colores pueden variar y seguro van a variar.</p>
+        <p><strong>No hay reservas eternas. No hay carrito. No hay drama. Solo mensaje privado y destino.</strong></p>
+      </article>
+    </section>
+
+    <h2 class="warning-title ink-block">Cantidades sospechosamente bajas</h2>
+
+    <section id="mercado">
+      <h2 class="section-title">Catálogo de prodigios</h2>
+      <div class="filter-bar">
+        <input type="text" placeholder="Buscar: enter gigante, mini boxing, dock usb, estampita, certificado anti abducción..." />
+        <button>Consultar disponibilidad</button>
+      </div>
+
+      <div class="catalog" id="catalog"></div>
+    </section>
+
+    <section id="colecciones">
+      <h2 class="section-title">Colecciones autorizadas</h2>
+      <div class="collections">
+        <article class="collection outline-block"><h3>Tecnología de escritorio</h3><p>Objetos para elevar, conectar, limpiar y fingir que el setup ya quedó profesional.</p><ul><li>Dock USB</li><li>Soporte laptop</li><li>Kit de limpieza</li><li>Aspiradora mini</li></ul></article>
+        <article class="collection outline-block"><h3>Ansiedad administrable</h3><p>Fidgets, palancas, dados y botones para sobrevivir reuniones, despliegues y decisiones de último minuto.</p><ul><li>Fidget táctico</li><li>Palanca anti ansiedad</li><li>Dado operativo</li><li>Mini boxing</li></ul></article>
+        <article class="collection outline-block"><h3>Reliquias digitales</h3><p>Certificados, estampitas y oraciones para proteger procesos que ni QA quiso mirar directamente.</p><ul><li>Anti abducción</li><li>Despliegue viernes</li><li>Migración de datos</li><li>Fe operativa</li></ul></article>
+      </div>
+    </section>
+
+    <footer class="footer ink-block">Mercado oficial Puntos Colombia · Escribir por privado a Grace · Cantidades sospechosamente bajas · Todo será visto</footer>
+  </main>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "Fidget Táctico de Oficina",
+        ribbon: "Fidget táctico",
+        description: "Para descargar estrés sin disparar correos pasivo-agresivos. No apto para reuniones con cámara prendida.",
+        points: 3,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/open/f7b4350bcd4f447c986b237d85f5c6dd-goods.jpeg",
+        alt: "Fidget táctico de oficina"
+      },
+      {
+        id: 2,
+        name: "Tecla Enter de Alto Impacto",
+        ribbon: "Enter definitivo",
+        description: "Para cerrar discusiones, enviar builds y dramatizar decisiones que pudieron esperar aprobación.",
+        points: 8,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/489c229c-3c18-440d-a4c3-814ee5670d86.jpg",
+        alt: "Tecla enter gigante"
+      },
+      {
+        id: 3,
+        name: "Kit de Exorcismo para Laptop",
+        ribbon: "Limpieza profunda",
+        description: "Retira polvo, migas y energías acumuladas desde el último despliegue fallido.",
+        points: 8,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/2dadec87-7167-4450-b31b-c57e527e1b1f.jpg",
+        alt: "Set para limpieza de laptop"
+      },
+      {
+        id: 4,
+        name: "Mini Boxing de Comité",
+        ribbon: "Combate ejecutivo",
+        description: "Para pelear simbólicamente contra requerimientos ambiguos sin abrir un incidente.",
+        points: 5,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/8c5a813e-f671-4887-ba4a-d755d56bdbed.jpg",
+        alt: "Mini boxing"
+      },
+      {
+        id: 5,
+        name: "Reposamuñeca con Poderes de Limpieza",
+        ribbon: "Muñeca asistida",
+        description: "Apoya la mano, limpia el teclado y da la ilusión de que todo está bajo control.",
+        points: 10,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/76fa1746-babc-4335-9854-248e21bf7970.jpg",
+        alt: "Soporte de muñeca con accesorios de limpieza"
+      },
+      {
+        id: 6,
+        name: "Mano Armable de Señales Corporativas",
+        ribbon: "Lenguaje manual",
+        description: "Para decir aprobado, bloqueado o esto no estaba en alcance sin gastar saliva.",
+        points: 3,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/e0cffcbe-bdc0-4e13-a827-e07e87811ddd.jpg",
+        alt: "Mano para signos armable"
+      },
+      {
+        id: 7,
+        name: "Palanca Anti Ansiedad Sprint 5",
+        ribbon: "Cambio de ambiente",
+        description: "Cambie de primera a esto se revisa después con gesto mecánico y fe razonable.",
+        points: 2,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/9e4f3f21-e61c-4afe-bed0-3b972342dee4.jpg",
+        alt: "Fidget en forma de palanca de cambios"
+      },
+      {
+        id: 8,
+        name: "Dado del Destino Operativo",
+        ribbon: "Azar controlado",
+        description: "Perfecto para priorizar tareas cuando todo es urgente y nada trae aceptación clara.",
+        points: 2,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/36bbf932-2cea-4ab6-869e-71cdce31b2fd.jpg",
+        alt: "Fidget en forma de dado"
+      },
+      {
+        id: 9,
+        name: "Palanca Gamer de Productividad Dudosa",
+        ribbon: "Gamer místico",
+        description: "Para que el teclado parezca cabina de mando, aunque solo estés contestando un correo.",
+        points: 3,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/open/15222178c2f54461a2b6174b8ea53451-goods.jpeg",
+        alt: "Palanca para teclado gamer"
+      },
+      {
+        id: 10,
+        name: "Posavasos de Decisiones Dudosas",
+        ribbon: "Mesa protegida",
+        description: "Protege la mesa mientras el participante gasta puntos sin mirar atrás.",
+        points: 7,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/open/ac83c942ddc54d8c9730931026614e52-goods.jpeg",
+        alt: "Posavasos"
+      },
+      {
+        id: 11,
+        name: "Altar Portátil para Laptop",
+        ribbon: "Elevación técnica",
+        description: "Eleva el equipo y también la esperanza de que la postura sobreviva a otra reunión.",
+        points: 5,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/eceec856-ec3c-4c4b-af16-eafa7f463822.jpg",
+        alt: "Soporte para laptop"
+      },
+      {
+        id: 12,
+        name: "Dock USB Multiplicador de Esperanza",
+        ribbon: "Puertos de fe",
+        description: "Para conectar lo desconectado, incluyendo cables, periféricos y expectativas.",
+        points: 10,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/ddf40fba-f214-4343-b3d7-33a0d8fd2dc1.jpg",
+        alt: "Dock USB"
+      },
+      {
+        id: 13,
+        name: "Trono Individual para Control",
+        ribbon: "Control ceremonial",
+        description: "Un pedestal para que el control deje de vivir exiliado entre cojines y cables.",
+        points: 5,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/062d1940-7660-489f-b920-07a693755a41.jpg",
+        alt: "Soporte para control de videojuego"
+      },
+      {
+        id: 14,
+        name: "Santuario Doble de Controles",
+        ribbon: "Doble autoridad",
+        description: "Para parejas de controles que merecen mejor destino que una gaveta llena de pilas viejas.",
+        points: 7,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/e07f462a-8a2e-4536-b90a-c73848f2f96c.jpg",
+        alt: "Soporte para controles de videojuego"
+      },
+      {
+        id: 15,
+        name: "Perchero Santo para Audífonos",
+        ribbon: "Audio bendecido",
+        description: "Para colgar audífonos, frustraciones y llamadas que pudieron terminar antes.",
+        points: 5,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/3211932c-c7f0-4b2c-a3e3-f23917a326bf.jpg",
+        alt: "Soporte para audífonos"
+      },
+      {
+        id: 16,
+        name: "Hub Gamer de Conexiones Milagrosas",
+        ribbon: "Control con puertos",
+        description: "Un control que no controla, pero conecta. Casi una metáfora de algunos comités.",
+        points: 10,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/169359b4-02e9-44b9-a22f-d1a3050ae6ee.jpg",
+        alt: "Hub USB en forma de control de videojuego"
+      },
+      {
+        id: 17,
+        name: "Aspiradora Mini de Migas y Culpa",
+        ribbon: "Succión de escritorio",
+        description: "Absorbe residuos del escritorio y evidencia de meriendas tomadas durante soporte crítico.",
+        points: 10,
+        available: true,
+        type: "physical",
+        image: "https://img.kwcdn.com/product/fancy/7c1f452f-e962-4dbe-b6f2-eca718e415f3.jpg",
+        alt: "Aspiradora para escritorio"
+      },
+      {
+        id: 18,
+        name: "Póliza Intergaláctica Preventiva",
+        ribbon: "Producto digital",
+        description: "Certificado imprimible para presentar ante luces raras, zumbidos sospechosos y auditorías de otro planeta.",
+        points: 1,
+        available: true,
+        type: "digital",
+        digitalLabel: "Certificado Anti Abducción"
+      },
+      {
+        id: 19,
+        name: "Estampita de Despliegue en Viernes",
+        ribbon: "DevOps espiritual",
+        description: "Para pegar cerca del pipeline y pedir que nada explote después de que todos apaguen Teams.",
+        points: 1,
+        available: true,
+        type: "digital",
+        digitalLabel: "Estampita Viernes 5:00 PM"
+      },
+      {
+        id: 20,
+        name: "Oración por la Migración de Datos",
+        ribbon: "Data bendita",
+        description: "Incluye súplica por IDs externos, campos obligatorios, deduplicación y paz para quien abra el CSV.",
+        points: 1,
+        available: true,
+        type: "digital",
+        digitalLabel: "Oración Migratoria"
+      }
+    ];
+
+    function createProductCard(product) {
+      const visualContent = product.type === "digital"
+        ? `<div class="digital-visual">${product.digitalLabel}</div>`
+        : `<img src="${product.image}" alt="${product.alt}" loading="lazy" />`;
+
+      const availabilityClass = product.available ? "available" : "sold-out";
+      const availabilityText = product.available ? "Disponible" : "Agotado espiritualmente";
+
+      return `
+        <article class="product ${availabilityClass}">
+          <div class="ribbon">${product.ribbon}</div>
+          <div class="visual">${visualContent}</div>
+          <div class="product-body">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="availability">${availabilityText}</div>
+            <div class="price"><span>Puntos</span><strong>${product.points}</strong></div>
+          </div>
+        </article>
+      `;
+    }
+
+    document.getElementById("catalog").innerHTML = products.map(createProductCard).join("");
+  </script>
+</body>
+</html>
